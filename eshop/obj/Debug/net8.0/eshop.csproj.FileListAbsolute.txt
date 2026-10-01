@@ -25,7 +25,6 @@ G:\.net projects\eshop\eshop\obj\Debug\net8.0\staticwebassets.build.json
 G:\.net projects\eshop\eshop\obj\Debug\net8.0\staticwebassets.build.json.cache
 G:\.net projects\eshop\eshop\obj\Debug\net8.0\staticwebassets.development.json
 G:\.net projects\eshop\eshop\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-G:\.net projects\eshop\eshop\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 G:\.net projects\eshop\eshop\obj\Debug\net8.0\eshop.dll
 G:\.net projects\eshop\eshop\obj\Debug\net8.0\refint\eshop.dll
 G:\.net projects\eshop\eshop\obj\Debug\net8.0\eshop.pdb
@@ -150,3 +149,4 @@ G:\.net projects\eshop\eshop\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.Enti
 G:\.net projects\eshop\eshop\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 G:\.net projects\eshop\eshop\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 G:\.net projects\eshop\eshop\obj\Debug\net8.0\eshop.sourcelink.json
+G:\.net projects\eshop\eshop\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
