@@ -149,3 +149,4 @@ G:\.net projects\eshop\eshop\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.
 G:\.net projects\eshop\eshop\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 G:\.net projects\eshop\eshop\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 G:\.net projects\eshop\eshop\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+G:\.net projects\eshop\eshop\obj\Debug\net8.0\eshop.sourcelink.json
