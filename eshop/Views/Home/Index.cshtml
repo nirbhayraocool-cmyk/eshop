@@ -1,0 +1,290 @@
+﻿@model eshop.Models.HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+@if (TempData["Success"] != null)
+{
+    <div style="background:#d4edda;color:#155724;padding:12px;text-align:center;">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div style="background:#f8d7da;color:#721c24;padding:12px;text-align:center;">@TempData["Error"]</div>
+}
+<!--  HERO  -->
+<section class="hero" id="home">
+    <div class="hero-content">
+
+        <span class="offer">🔥 Big Sale 2026</span>
+
+        <h1>
+            Discover Your <span>Perfect Style</span><br>
+            With NextCart
+        </h1>
+
+        <p>
+            Shop the latest fashion, electronics, accessories and more.
+            Enjoy exclusive deals, fast delivery, secure payments and easy returns.
+        </p>
+
+        <div class="hero-btn" >
+            <a class="shop-btn" asp-controller="Home" asp-fragment="featured" style="text-decoration:none">Shop Now</a>
+            <a class="explore-btn" asp-controller="Home" asp-fragment="newarrival" style="text-decoration:none">Explore More</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= SHOP BY CATEGORY ================= -->
+<section class="category-section" id="category">
+
+    <div class="section-title">
+        <h2>Shop by Categories</h2>
+        <p>Find everything you need from our top collections.</p>
+    </div>
+
+    <div class="category-container">
+
+        <div class="category-card">
+            <img src="/imgshop/woman-4.webp" alt="Fashion">
+            <h3>Fashion</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="https://img.magnific.com/free-photo/two-beautiful-women-shopping-town_1303-16431.jpg?semt=ais_hybrid&w=740&q=80" alt="Beauty">
+            <h3>Beauty</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="https://t3.ftcdn.net/jpg/01/40/97/08/360_F_140970862_ApYCTSWXUDpNbpQP4UgNyhnOXnuG4gY5.jpg" alt="Fashion">
+            <h3>Fashion</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="https://media.istockphoto.com/id/863190232/photo/happy-girl-shopping-in-the-fashion-store.jpg?s=612x612&w=0&k=20&c=5JfvoWoOWXa5Zk4UTGQuAQ3ZWc_Bar3wnV0Tfec5hcU=" alt="Fashion">
+            <h3>Fashion</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="https://media.istockphoto.com/id/2164807382/photo/making-the-best-of-the-day-together.jpg?s=612x612&w=0&k=20&c=ONB6q_9SXI4NOlfSwggNtbUYfJHdOIFvF-yuMNjJHD4=" alt="Bag">
+            <h3>Bag</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="https://media.istockphoto.com/id/1277267181/photo/young-attractive-happy-couple-hugging-smiling-and-holding-shopping-bags-while-walking-in.jpg?s=612x612&w=0&k=20&c=rhalFXbDy8oVW7pGHa0gUfvrlsnFGTqeSiLmAQXbgVg=" alt="Fashion">
+            <h3>Fashion</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="https://img.magnific.com/free-photo/black-friday-elements-assortment_23-2149074075.jpg?semt=ais_hybrid&w=740&q=80" alt="Bags">
+            <h3>Bags</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="/imgshop/shirt-3.webp" alt="Fashion">
+            <h3>Fashion</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="https://img.magnific.com/free-photo/black-friday-elements-assortment_23-2149074075.jpg?semt=ais_hybrid&w=740&q=80" alt="Bags">
+            <h3>Bags</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="/imgshop/shirt-3.webp" alt="Fashion">
+            <h3>Fashion</h3>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= FLASH SALE ================= -->
+<section class="flash-sale" id="newarrival">
+
+    <div class="flash-header">
+
+        <div>
+            <h2>🔥 Flash Sale</h2>
+            <p>Limited Time Offers</p>
+        </div>
+
+        <div class="timer">
+            <div class="time-box">
+                <h3 id="hours">12</h3>
+                <span>Hours</span>
+            </div>
+            <div class="time-box">
+                <h3 id="minutes">30</h3>
+                <span>Min</span>
+            </div>
+            <div class="time-box">
+                <h3 id="seconds">45</h3>
+                <span>Sec</span>
+            </div>
+        </div>
+
+        <button class="view-btn">View All</button>
+
+    </div>
+
+    <div class="flash-products">
+        @foreach (var p in Model.FlashProducts)
+        {
+            <div class="flash-card">
+                @if (p.DiscountPercent > 0)
+                {
+                    <span class="discount">-@p.DiscountPercent%</span>
+                }
+                <img src="@p.ImageUrl" alt="@p.Name">
+                <h3>@p.Name</h3>
+                <p class="price">₹@p.Price.ToString("N0") <del>₹@p.OldPrice.ToString("N0")</del></p>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <form asp-controller="Home" asp-action="AddToCart" method="post">
+                        <input type="hidden" name="productId" value="@p.Id" />
+                        <button type="submit" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                }
+                else
+                {
+                    <button type="button" class="add-cart-btn"
+                            onclick="location.href='@Url.Action("Login", "Account")'">
+                        Add to Cart
+                    </button>
+                }
+            </div>
+        }
+    </div>
+</section>
+
+<!-- ================= FEATURED PRODUCTS ================= -->
+<section class="featured" id="featured">
+
+    <div class="title">
+        <h2>⭐ Featured Products</h2>
+        <p>Handpicked Products Just For You</p>
+    </div>
+
+    <div class="filter-btn">
+        <button type="button" onclick="location.href='@Url.Action("Search", "Home")'">All</button>
+        <button type="button" onclick="location.href='@Url.Action("Search", "Home", new { q = "Fashion" })'">Fashion</button>
+        <button type="button" onclick="location.href='@Url.Action("Search", "Home", new { q = "Shoes" })'">Shoes</button>
+    </div>
+
+    <div class="product-container">
+        @foreach (var p in Model.FeaturedProducts)
+        {
+            <div class="product-card">
+                @if (p.DiscountPercent > 0)
+                {
+                    <span class="tag">-@p.DiscountPercent%</span>
+                }
+                <i class="fa-regular fa-heart heart"></i>
+                <img src="@p.ImageUrl" alt="@p.Name">
+                <h3>@p.Name</h3>
+                <div class="rating">★★★★★</div>
+                <p class="price">₹@p.Price.ToString("N0") <del>₹@p.OldPrice.ToString("N0")</del></p>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <form asp-controller="Home" asp-action="AddToCart" method="post">
+                        <input type="hidden" name="productId" value="@p.Id" />
+                        <button type="submit" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                }
+                else
+                {
+                    <button type="button" class="add-cart-btn"
+                            onclick="location.href='@Url.Action("Login", "Account")'">
+                        Add to Cart
+                    </button>
+                }
+            </div>
+        }
+    </div>
+
+</section>
+
+<!-- ================= WHY CHOOSE US ================= -->
+<section class="why-us" id="Cta-footer">
+
+    <div class="section-heading">
+        <h2>Why Choose NextCart?</h2>
+        <p>We make online shopping simple, secure and enjoyable.</p>
+    </div>
+
+    <div class="why-container">
+
+        <div class="why-card">
+            <i class="fa-solid fa-truck-fast"></i>
+            <h3>Free Delivery</h3>
+            <p>Free shipping on orders above ₹999.</p>
+        </div>
+
+        <div class="why-card">
+            <i class="fa-solid fa-credit-card"></i>
+            <h3>Secure Payment</h3>
+            <p>100% safe and encrypted payment methods.</p>
+        </div>
+
+        <div class="why-card">
+            <i class="fa-solid fa-rotate-left"></i>
+            <h3>Easy Returns</h3>
+            <p>7-day hassle-free return policy.</p>
+        </div>
+
+        <div class="why-card">
+            <i class="fa-solid fa-headset"></i>
+            <h3>24/7 Support</h3>
+            <p>Our team is always ready to help you.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= CUSTOMER REVIEWS ================= -->
+<section class="reviews">
+
+    <div class="review-title">
+        <h2>What Our Customers Say</h2>
+        <p>Thousands of happy customers trust NextCart for quality products and fast delivery.</p>
+    </div>
+
+    <div class="review-container">
+
+        <!-- Review 1 -->
+        <div class="review-card">
+            <img src="/imgshop/male.jpg" alt="Rahul Sharma">
+            <h3>Rahul Sharma</h3>
+            <div class="stars">★★★★★</div>
+            <p>
+                "Amazing quality products and super fast delivery.
+                I will definitely shop again from NextCart."
+            </p>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card">
+            <img src="/imgshop/female-2.jpg" alt="Priya Verma">
+            <h3>Priya Verma</h3>
+            <div class="stars">★★★★★</div>
+            <p>
+                "Excellent customer support and secure payment.
+                Highly recommended for online shopping."
+            </p>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card">
+            <img src="/imgshop/female-3.jpg" alt="Mansi">
+            <h3>Mansi</h3>
+            <div class="stars">★★★★☆</div>
+            <p>
+                "Great shopping experience with affordable prices.
+                The return process was also very easy."
+            </p>
+        </div>
+
+    </div>
+
+</section>

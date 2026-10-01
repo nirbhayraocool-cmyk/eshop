@@ -1,0 +1,56 @@
+﻿@model List<eshop.Models.Product>
+@{
+    ViewData["Title"] = "Admin - Products";
+}
+
+<div class="admin-wrap">
+    <div class="admin-head">
+        <h2>Products</h2>
+        <a asp-action="Orders" class="admin-edit">📦 Orders</a>
+        <a asp-action="Create" class="admin-save">+ Add Product</a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div style="background:#d4edda;color:#155724;padding:10px;margin-bottom:15px;">@TempData["Success"]</div>
+    }
+
+    <div style="overflow-x:auto;">
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Old Price</th>
+                    <th>Category</th>
+                    <th>Section</th>
+                    <th>Active</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr>
+                        <td><img src="@p.ImageUrl" alt="@p.Name" style="width:60px;height:60px;object-fit:cover;border-radius:6px;" /></td>
+                        <td>@p.Name</td>
+                        <td>₹@p.Price.ToString("N0")</td>
+                        <td>₹@p.OldPrice.ToString("N0")</td>
+                        <td>@p.Category</td>
+                        <td>@p.Section</td>
+                        <td>@(p.IsActive ? "Yes" : "No")</td>
+                        <td style="white-space:nowrap;">
+                            <a asp-action="Edit" asp-route-id="@p.Id" class="admin-edit">Edit</a>
+                            <form asp-action="Delete" method="post" style="display:inline"
+                                  onsubmit="return confirm('Delete this product?');">
+                                <input type="hidden" name="id" value="@p.Id" />
+                                <button type="submit" class="remove-btn">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

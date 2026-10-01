@@ -1,0 +1,23 @@
+﻿@model eshop.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="auth-box">
+    <h2>Create Account</h2>
+    <form asp-action="Register" method="post">
+        <div asp-validation-summary="ModelOnly" class="auth-error"></div>
+
+        <input asp-for="Email" placeholder="Email" />
+        <span asp-validation-for="Email" class="auth-error"></span>
+
+        <input asp-for="Password" placeholder="Password" />
+        <span asp-validation-for="Password" class="auth-error"></span>
+
+        <input asp-for="ConfirmPassword" placeholder="Confirm Password" />
+        <span asp-validation-for="ConfirmPassword" class="auth-error"></span>
+
+        <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a asp-action="Login">Login</a></p>
+</div>

@@ -1,0 +1,32 @@
+﻿@model eshop.Models.Product
+
+<input type="hidden" asp-for="Id" />
+
+<label>Name</label>
+<input asp-for="Name" />
+<span asp-validation-for="Name" class="auth-error"></span>
+
+<label>Price (₹)</label>
+<input asp-for="Price" />
+<span asp-validation-for="Price" class="auth-error"></span>
+
+<label>Old Price (₹)</label>
+<input asp-for="OldPrice" />
+
+<label>Category</label>
+<input asp-for="Category" placeholder="Fashion, Shoes..." />
+
+<label>Section (Where should it appear on the index page?)</label>
+<select asp-for="Section">
+    <option value="Flash">Flash Sale</option>
+    <option value="Featured">Featured</option>
+</select>
+
+<label>Image upload (jpg, png, webp, max 2MB)</label>
+<input type="file" name="imageFile" accept=".jpg,.jpeg,.png,.webp" />
+
+<label>ya Image URL</label>
+<input asp-for="ImageUrl" placeholder="/imgshop/boot.webp Or https://..." />
+<span asp-validation-for="ImageUrl" class="auth-error"></span>
+
+<label class="check"><input asp-for="IsActive" type="checkbox" /> Active (View on site)</label>

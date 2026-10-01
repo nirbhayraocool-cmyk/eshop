@@ -1,0 +1,78 @@
+﻿@model List<eshop.Models.CartItem>
+
+@{
+    ViewData["Title"] = "My Cart";
+    var grandTotal = Model.Sum(x => x.Price * x.Quantity);
+    var last = ViewBag.LastOrder as eshop.Models.Order;
+}
+
+<section class="cart-page">
+    <h2>🛒 My Cart</h2>
+
+    @if (TempData["Error"] != null)
+    {
+        <div style="background:#f8d7da;color:#721c24;padding:12px;margin-bottom:15px;">@TempData["Error"]</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="cart-empty">
+            <p>Your cart is empty.</p>
+            <a asp-controller="Home" asp-action="Index" class="cart-continue">Continue Shopping</a>
+        </div>
+    }
+    else
+    {
+        <div class="cart-table-wrap">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ProductName</td>
+                            <td>₹@item.Price.ToString("N0")</td>
+                            <td>
+                                <form asp-action="UpdateQuantity" method="post" class="qty-form">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <input type="number" name="quantity" value="@item.Quantity" min="1" max="100" />
+                                    <button type="submit">Update</button>
+                                </form>
+                            </td>
+                            <td>₹@((item.Price * item.Quantity).ToString("N0"))</td>
+                            <td>
+                                <form asp-action="RemoveFromCart" method="post"
+                                      onsubmit="return confirm('Remove this item from cart?');">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <button type="submit" class="remove-btn">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="cart-summary">
+            <h3>Grand Total: ₹@grandTotal.ToString("N0")</h3>
+        </div>
+
+        <form asp-controller="Order" asp-action="Checkout" method="post" class="checkout-form">
+            <h3>Delivery Details</h3>
+            <input type="text" name="CustomerName" value="@last?.CustomerName" placeholder="Your Name" required />
+            <input type="tel" name="Phone" value="@last?.Phone" placeholder="Phone Number" required />
+            <textarea name="Address" placeholder="Delivery Address" required>@last?.Address</textarea>
+            <p><small>Payment: Cash on Delivery</small></p>
+            <button type="submit" class="admin-save">Place Order</button>
+            <a asp-controller="Home" asp-action="Index" class="admin-cancel">Continue Shopping</a>
+        </form>
+    }
+</section>

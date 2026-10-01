@@ -1,0 +1,14 @@
+﻿@model eshop.Models.Product
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<div class="admin-box">
+    <h2>Edit Product</h2>
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="auth-error"></div>
+        <partial name="_ProductForm" model="Model" />
+        <button type="submit" class="admin-save">Update</button>
+        <a asp-action="Index" class="admin-cancel">Cancel</a>
+    </form>
+</div>

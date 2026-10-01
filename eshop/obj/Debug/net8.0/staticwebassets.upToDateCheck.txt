@@ -1,0 +1,101 @@
+wwwroot\css\site.css
+wwwroot\favicon.ico
+wwwroot\imgshop\backgroud_remover_feature_04.webp
+wwwroot\imgshop\bag-2.avif
+wwwroot\imgshop\bag-d.jpg
+wwwroot\imgshop\bag-jpg.jpg
+wwwroot\imgshop\bag-we.jpg
+wwwroot\imgshop\bag.avif
+wwwroot\imgshop\boot-2.webp
+wwwroot\imgshop\boot-3.jpg
+wwwroot\imgshop\boot.webp
+wwwroot\imgshop\boot4.jpg
+wwwroot\imgshop\boots (1).jpg
+wwwroot\imgshop\boots (3).jpg
+wwwroot\imgshop\c11ac0de-d15d-4628-b640-100201aa75e7.webp
+wwwroot\imgshop\female-2.jpg
+wwwroot\imgshop\female-3.jpg
+wwwroot\imgshop\female.jpg
+wwwroot\imgshop\home-2.jpg
+wwwroot\imgshop\home-3.jpg
+wwwroot\imgshop\home-4.jpg
+wwwroot\imgshop\home-5.webp
+wwwroot\imgshop\home.avif
+wwwroot\imgshop\jeans.avif
+wwwroot\imgshop\male.jpg
+wwwroot\imgshop\shirt-1 (1).jpg
+wwwroot\imgshop\shirt-1 (10).jpg
+wwwroot\imgshop\shirt-1 (4).jpg
+wwwroot\imgshop\shirt-1 (5).jpg
+wwwroot\imgshop\shirt-3.webp
+wwwroot\imgshop\shirts-2.avif
+wwwroot\imgshop\shirts-4.avif
+wwwroot\imgshop\shirts.avif
+wwwroot\imgshop\virtual_model_visual_5_1_01.webp
+wwwroot\imgshop\woma shirt-1 (2).jpg
+wwwroot\imgshop\woma shirt-1 (8).jpg
+wwwroot\imgshop\woman shirt-1 (6).jpg
+wwwroot\imgshop\woman-2.avif
+wwwroot\imgshop\woman-3.avif
+wwwroot\imgshop\woman-4.webp
+wwwroot\imgshop\woman.avif
+wwwroot\js\site.js
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+wwwroot\lib\bootstrap\LICENSE
+wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
+wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
+wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+wwwroot\lib\jquery-validation\dist\additional-methods.js
+wwwroot\lib\jquery-validation\dist\additional-methods.min.js
+wwwroot\lib\jquery-validation\dist\jquery.validate.js
+wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
+wwwroot\lib\jquery-validation\LICENSE.md
+wwwroot\lib\jquery\dist\jquery.js
+wwwroot\lib\jquery\dist\jquery.min.js
+wwwroot\lib\jquery\dist\jquery.min.map
+wwwroot\lib\jquery\LICENSE.txt
+wwwroot\style.css
+wwwroot\style2.css

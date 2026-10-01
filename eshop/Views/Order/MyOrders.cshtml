@@ -1,0 +1,62 @@
+﻿@model List<eshop.Models.Order>
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<section class="cart-page">
+    <h2>📦 My Orders</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div style="background:#d4edda;color:#155724;padding:12px;margin-bottom:15px;">@TempData["Success"]</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="cart-empty">
+            <p>No order has been received yet.</p>
+            <a asp-controller="Home" asp-action="Index" class="cart-continue"> Shopping Now </a>
+        </div>
+    }
+    else
+    {
+        foreach (var order in Model)
+        {
+            <div class="order-card">
+                <div class="order-head">
+                    <div>
+                        <strong>Order #@order.Id</strong><br />
+                        <small>@order.CreatedAt.ToString("dd MMM yyyy, hh:mm tt")</small>
+                    </div>
+                    <span class="order-status">@order.Status</span>
+                </div>
+
+                <table class="cart-table">
+                    <thead>
+                        <tr><th>Product</th><th>Price</th><th>Qty</th><th>Total</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in order.Items)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>₹@item.Price.ToString("N0")</td>
+                                <td>@item.Quantity</td>
+                                <td>₹@((item.Price * item.Quantity).ToString("N0"))</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="order-foot">
+                    <div>
+                        <small>Deliver to:</small><br />
+                        @order.CustomerName, @order.Phone<br />
+                        @order.Address
+                    </div>
+                    <h3>Total: ₹@order.TotalAmount.ToString("N0")</h3>
+                </div>
+            </div>
+        }
+    }
+</section>

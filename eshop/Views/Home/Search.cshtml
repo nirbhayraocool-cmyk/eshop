@@ -1,0 +1,71 @@
+﻿@model List<eshop.Models.Product>
+@{
+    ViewData["Title"] = "Search";
+    var q = ViewBag.Query as string;
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
+}
+
+@if (TempData["Success"] != null)
+{
+    <div style="background:#d4edda;color:#155724;padding:12px;text-align:center;">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div style="background:#f8d7da;color:#721c24;padding:12px;text-align:center;">@TempData["Error"]</div>
+}
+
+<section class="featured">
+    <div class="title">
+        <h2>🔍 Search Results</h2>
+        @if (string.IsNullOrEmpty(q))
+        {
+            <p>All products</p>
+        }
+        else
+        {
+            <p>"@q" for @Model.Count result found</p>
+        }
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="cart-empty">
+            <p>No product found. Try another name.</p>
+            <a asp-controller="Home" asp-action="Index" class="cart-continue">back to Home</a>
+        </div>
+    }
+    else
+    {
+        <div class="product-container">
+            @foreach (var p in Model)
+            {
+                <div class="product-card">
+                    @if (p.DiscountPercent > 0)
+                    {
+                        <span class="tag">-@p.DiscountPercent%</span>
+                    }
+                    <img src="@p.ImageUrl" alt="@p.Name">
+                    <h3>@p.Name</h3>
+                    <div class="rating">★★★★★</div>
+                    <p class="price">₹@p.Price.ToString("N0") <del>₹@p.OldPrice.ToString("N0")</del></p>
+
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <form asp-controller="Home" asp-action="AddToCart" method="post">
+                            <input type="hidden" name="productId" value="@p.Id" />
+                            <input type="hidden" name="returnUrl" value="@returnUrl" />
+                            <button type="submit" class="add-cart-btn">Add to Cart</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <button type="button" class="add-cart-btn"
+                                onclick="location.href='@Url.Action("Login", "Account")'">
+                            Add to Cart
+                        </button>
+                    }
+                </div>
+            }
+        </div>
+    }
+</section>
