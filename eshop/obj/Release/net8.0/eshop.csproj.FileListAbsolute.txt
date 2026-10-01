@@ -1,5 +1,11 @@
+G:\.net projects\eshop\eshop\bin\Release\net8.0\publish\web.config
 G:\.net projects\eshop\eshop\bin\Release\net8.0\appsettings.Development.json
 G:\.net projects\eshop\eshop\bin\Release\net8.0\appsettings.json
+G:\.net projects\eshop\eshop\bin\Release\net8.0\publish\appsettings.Development.json
+G:\.net projects\eshop\eshop\bin\Release\net8.0\publish\appsettings.json
+G:\.net projects\eshop\eshop\bin\Release\net8.0\publish\eshop.deps.json
+G:\.net projects\eshop\eshop\bin\Release\net8.0\publish\eshop.runtimeconfig.json
+G:\.net projects\eshop\eshop\bin\Release\net8.0\publish\eshop.staticwebassets.endpoints.json
 G:\.net projects\eshop\eshop\bin\Release\net8.0\eshop.staticwebassets.runtime.json
 G:\.net projects\eshop\eshop\bin\Release\net8.0\eshop.staticwebassets.endpoints.json
 G:\.net projects\eshop\eshop\bin\Release\net8.0\eshop.exe
@@ -143,6 +149,7 @@ G:\.net projects\eshop\eshop\obj\Release\net8.0\staticwebassets.build.json
 G:\.net projects\eshop\eshop\obj\Release\net8.0\staticwebassets.build.json.cache
 G:\.net projects\eshop\eshop\obj\Release\net8.0\staticwebassets.development.json
 G:\.net projects\eshop\eshop\obj\Release\net8.0\staticwebassets.build.endpoints.json
+G:\.net projects\eshop\eshop\obj\Release\net8.0\staticwebassets.upToDateCheck.txt
 G:\.net projects\eshop\eshop\obj\Release\net8.0\eshop.csproj.Up2Date
 G:\.net projects\eshop\eshop\obj\Release\net8.0\eshop.dll
 G:\.net projects\eshop\eshop\obj\Release\net8.0\refint\eshop.dll

@@ -1,4 +1,7 @@
 .vs/
 bin/
-obj/\.vscode/
+obj/
+*.user
 *.suo
+*.userosscache
+*.sln.docstates
