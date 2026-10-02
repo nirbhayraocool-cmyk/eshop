@@ -148,31 +148,31 @@
                 <h2 class="footer-logo">Next<span>Cart</span></h2>
                 <p>NextCart is your trusted online shopping destination for fashion, electronics, home essentials and more.</p>
                 <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://www.facebook.com/" target="_black"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://x.com/" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://www.linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
             </div>
 
             <div class="footer-col">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Shop</a></li>
-                    <li><a href="#">Categories</a></li>
-                    <li><a href="#">Offers</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a asp-controller="Home" asp-action="Index" asp-fragment="home">Home</a></li>
+                    <li><a asp-controller="Home" asp-action="Index" asp-fragment="newarrival">Shop</a></li>
+                    <li><a asp-controller="Home" asp-action="Index" asp-fragment="category">Categories</a></li>
+                    <li><a asp-controller="Home" asp-action="Index" asp-fragment="newarrival">Offers</a></li>
+                    <li><a asp-action="Contact" >Contact</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
                 <h3>Categories</h3>
                 <ul>
-                    <li><a href="#">Fashion</a></li>
-                    <li><a href="#">Electronics</a></li>
-                    <li><a href="#">Shoes</a></li>
-                    <li><a href="#">Beauty</a></li>
+                    <li><a asp-controller="Home" asp-action="Index" asp-fragment="newarrival">Fashion</a></li>
+                    <li><a asp-controller="Home" asp-action="Index" asp-fragment="newarrival">Electronics</a></li>
+                    <li><a asp-controller="Home" asp-action="Index" asp-fragment="featured">Shoes</a></li>
+                    <li><a asp-controller="Home" asp-action="Index" asp-fragment="category">Beauty</a></li>
                     <li><a href="#">Accessories</a></li>
                 </ul>
             </div>
@@ -180,7 +180,7 @@
             <div class="footer-col">
                 <h3>Customer Care</h3>
                 <ul>
-                    <li><a href="#">My Account</a></li>
+                    <li><a asp-controller="Account" asp-action="Login">My Account</a></li>
                     <li><a href="#">Track Order</a></li>
                     <li><a href="#">Return Policy</a></li>
                     <li><a href="#">Privacy Policy</a></li>
