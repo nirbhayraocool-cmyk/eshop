@@ -39,7 +39,15 @@
                         @foreach (var item in order.Items)
                         {
                             <tr>
-                                <td>@item.ProductName</td>
+                                <td>
+                                    @item.ProductName
+                                    @if (!string.IsNullOrEmpty(item.Size))
+                                    {
+                                        <br />
+                        
+                                        <small>Size: @item.Size</small>
+                                    }
+                                </td>
                                 <td>₹@item.Price.ToString("N0")</td>
                                 <td>@item.Quantity</td>
                                 <td>₹@((item.Price * item.Quantity).ToString("N0"))</td>

@@ -53,7 +53,9 @@ namespace eshop.Controllers
                     ProductId = x.ProductId,
                     ProductName = x.ProductName,
                     Price = x.Price,
-                    Quantity = x.Quantity
+                    Quantity = x.Quantity,
+                    
+                    Size = x.Size
                 }).ToList()
             };
 

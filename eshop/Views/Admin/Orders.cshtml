@@ -1,6 +1,7 @@
 ﻿@model List<eshop.Models.Order>
 @{
     ViewData["Title"] = "Admin - Orders";
+    var images = ViewBag.Images as Dictionary<int, string>;
 }
 
 <div class="admin-wrap">
@@ -38,7 +39,20 @@
                     @foreach (var item in order.Items)
                     {
                         <tr>
-                            <td>@item.ProductName</td>
+                            <td>
+                                @if (images != null && images.TryGetValue(item.ProductId, out var img))
+                                {
+                                    <img src="@img" alt="@item.ProductName"
+                                         style="width:50px;height:50px;object-fit:cover;border-radius:6px;vertical-align:middle;margin-right:8px;" />
+                                }
+                                @item.ProductName
+                                @if (!string.IsNullOrEmpty(item.Size))
+                                {
+                                    <br />
+                        
+                                    <small>Size: @item.Size</small>
+                                }
+                            </td>
                             <td>₹@item.Price.ToString("N0")</td>
                             <td>@item.Quantity</td>
                             <td>₹@((item.Price * item.Quantity).ToString("N0"))</td>

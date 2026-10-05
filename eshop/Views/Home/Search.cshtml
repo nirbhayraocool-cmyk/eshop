@@ -44,12 +44,21 @@
                     {
                         <span class="tag">-@p.DiscountPercent%</span>
                     }
-                    <img src="@p.ImageUrl" alt="@p.Name">
-                    <h3>@p.Name</h3>
+                    <a asp-controller="Home" asp-action="Details" asp-route-id="@p.Id" class="card-link">
+                        <img src="@p.ImageUrl" alt="@p.Name">
+                        <h3>@p.Name</h3>
+                    </a>
                     <div class="rating">★★★★★</div>
                     <p class="price">₹@p.Price.ToString("N0") <del>₹@p.OldPrice.ToString("N0")</del></p>
 
-                    @if (User.Identity?.IsAuthenticated == true)
+                    @if (p.SizeList.Any())
+                    {
+                        <button type="button" class="add-cart-btn"
+                                onclick="location.href='@Url.Action("Details", "Home", new { id = p.Id })'">
+                            Select Size
+                        </button>
+                    }
+                    else if (User.Identity?.IsAuthenticated == true)
                     {
                         <form asp-controller="Home" asp-action="AddToCart" method="post">
                             <input type="hidden" name="productId" value="@p.Id" />

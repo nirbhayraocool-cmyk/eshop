@@ -29,7 +29,7 @@ namespace eshop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Product model, IFormFile? imageFile)
+        public async Task<IActionResult> Create(Product model, IFormFile? imageFile, List<IFormFile>? galleryFiles)
         {
             ModelState.Remove(nameof(Product.ImageUrl));
 
@@ -44,7 +44,7 @@ namespace eshop.Controllers
 
             if (string.IsNullOrWhiteSpace(model.ImageUrl))
                 ModelState.AddModelError("ImageUrl", "Upload image or enter image URL.");
-
+            model.GalleryImages = await BuildGalleryAsync(model.GalleryImages, galleryFiles);
             if (!ModelState.IsValid) return View(model);
 
             model.Id = 0;
@@ -65,7 +65,7 @@ namespace eshop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Product model, IFormFile? imageFile)
+        public async Task<IActionResult> Edit(Product model, IFormFile? imageFile, List<IFormFile>? galleryFiles)
         {
             ModelState.Remove(nameof(Product.ImageUrl));
 
@@ -83,13 +83,16 @@ namespace eshop.Controllers
 
             if (string.IsNullOrWhiteSpace(model.ImageUrl))
                 ModelState.AddModelError("ImageUrl", "Upload image or enter image URL.");
-
+            model.GalleryImages = await BuildGalleryAsync(model.GalleryImages, galleryFiles);
             if (!ModelState.IsValid) return View(model);
 
             product.Name = model.Name;
             product.Price = model.Price;
             product.OldPrice = model.OldPrice;
             product.Category = model.Category;
+            product.Description = model.Description;
+            product.Sizes = model.Sizes;
+            product.GalleryImages = model.GalleryImages;
             product.Section = model.Section;
             product.ImageUrl = model.ImageUrl;
             product.IsActive = model.IsActive;
@@ -120,6 +123,12 @@ namespace eshop.Controllers
                 .OrderByDescending(o => o.CreatedAt)
                 .ToListAsync();
 
+            var productIds = orders.SelectMany(o => o.Items).Select(i => i.ProductId).Distinct().ToList();
+
+            ViewBag.Images = await _context.Products
+                .Where(p => productIds.Contains(p.Id))
+                .ToDictionaryAsync(p => p.Id, p => p.ImageUrl);
+
             return View(orders);
         }
 
@@ -138,6 +147,25 @@ namespace eshop.Controllers
                 TempData["Success"] = $"Order #{order.Id} The status of Order  {status}  has changed to";
             }
             return RedirectToAction(nameof(Orders));
+        }
+        private async Task<string?> BuildGalleryAsync(string? existing, List<IFormFile>? files)
+        {
+            var urls = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(existing))
+                urls.AddRange(existing.Split(new[] { '\r', '\n' },
+                    StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
+
+            if (files != null)
+            {
+                foreach (var f in files.Where(f => f.Length > 0))
+                {
+                    var path = await SaveImageAsync(f);
+                    if (path != null) urls.Add(path);
+                }
+            }
+
+            return urls.Count == 0 ? null : string.Join("\n", urls);
         }
         private async Task<string?> SaveImageAsync(IFormFile file)
         {

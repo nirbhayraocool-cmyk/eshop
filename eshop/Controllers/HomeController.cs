@@ -47,10 +47,24 @@ namespace eshop.Controllers
             ViewBag.Query = showAll ? null : q;
             return View(products);
         }
+        public async Task<IActionResult> Details(int id)
+        {
+            var product = await _context.Products
+                .FirstOrDefaultAsync(p => p.Id == id && p.IsActive);
+
+            if (product == null) return NotFound();
+
+            ViewBag.Related = await _context.Products
+                .Where(p => p.IsActive && p.Id != id && p.Category == product.Category)
+                .Take(4)
+                .ToListAsync();
+
+            return View(product);
+        }
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddToCart(int productId, int quantity = 1, string? returnUrl = null)
+        public async Task<IActionResult> AddToCart(int productId, int quantity = 1, string? size = null, string? returnUrl = null)
         {
             var isAjax = Request.Headers["X-Requested-With"] == "XMLHttpRequest";
 
@@ -68,10 +82,29 @@ namespace eshop.Controllers
                 return RedirectBack(returnUrl);
             }
 
+            // jis product ke sizes hain, uske liye size chunna zaroori hai
+            var sizes = product.SizeList;
+            if (sizes.Count > 0)
+            {
+                if (string.IsNullOrWhiteSpace(size) || !sizes.Contains(size))
+                {
+                    const string msg = "Pehle size chuno.";
+                    if (isAjax) return Json(new { success = false, message = msg });
+
+                    TempData["Error"] = msg;
+                    return RedirectToAction("Details", new { id = productId });
+                }
+            }
+            else
+            {
+                size = null;
+            }
+
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
 
+            // same product + same size ho to quantity badhao, warna naya row
             var existing = await _context.CartItems
-                .FirstOrDefaultAsync(x => x.UserId == userId && x.ProductId == productId);
+                .FirstOrDefaultAsync(x => x.UserId == userId && x.ProductId == productId && x.Size == size);
 
             if (existing != null)
             {
@@ -85,6 +118,7 @@ namespace eshop.Controllers
                     ProductId = product.Id,
                     ProductName = product.Name,   // DB se
                     Price = product.Price,        // DB se
+                    Size = size,
                     Quantity = quantity,
                     CreatedAt = DateTime.Now
                 });
@@ -92,24 +126,22 @@ namespace eshop.Controllers
 
             await _context.SaveChangesAsync();
 
+            var okMessage = size == null
+                ? $"{product.Name} cart me add ho gaya!"
+                : $"{product.Name} (Size {size}) cart me add ho gaya!";
+
             if (isAjax)
             {
                 var cartCount = await _context.CartItems
                     .Where(x => x.UserId == userId)
                     .SumAsync(x => x.Quantity);
 
-                return Json(new
-                {
-                    success = true,
-                    message = $"{product.Name} Added to cart!",
-                    cartCount
-                });
+                return Json(new { success = true, message = okMessage, cartCount });
             }
 
-            TempData["Success"] = $"{product.Name} Added to cart!";
+            TempData["Success"] = okMessage;
             return RedirectBack(returnUrl);
         }
-
         private IActionResult RedirectBack(string? returnUrl) =>
             !string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl)
                 ? LocalRedirect(returnUrl)

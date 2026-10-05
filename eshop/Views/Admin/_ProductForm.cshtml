@@ -16,11 +16,24 @@
 <label>Category</label>
 <input asp-for="Category" placeholder="Fashion, Shoes..." />
 
+<label>Description</label>
+<textarea asp-for="Description" rows="4" placeholder="Write about the product..."></textarea>
 <label>Section (Where should it appear on the index page?)</label>
 <select asp-for="Section">
     <option value="Flash">Flash Sale</option>
     <option value="Featured">Featured</option>
 </select>
+
+<label>Sizes ( S,M,L,XL ya 6,7,8,9). If you don't want a specific size, leave it blank.</label>
+<input asp-for="Sizes" placeholder="S,M,L,XL" />
+
+<label>
+    Extra photos, different angles (You can select more than one.)
+</label>
+<input type="file" name="galleryFiles" accept=".jpg,.jpeg,.png,.webp" multiple />
+
+<label>Or extra photo murals (one per line)</label>
+<textarea asp-for="GalleryImages" rows="3" placeholder="https://...&#10;https://..."></textarea>
 
 <label>Image upload (jpg, png, webp, max 2MB)</label>
 <input type="file" name="imageFile" accept=".jpg,.jpeg,.png,.webp" />

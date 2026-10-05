@@ -1,0 +1,140 @@
+﻿@model eshop.Models.Product
+@{
+    
+    ViewData["Title"] = Model.Name;
+    var related = ViewBag.Related as List<eshop.Models.Product> ?? new List<eshop.Models.Product>();
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
+    var images = Model.AllImages;
+}
+
+<section class="details-page">
+    <a asp-controller="Home" asp-action="Index" class="details-back">← Go back</a>
+
+    @if (TempData["Error"] != null)
+    {
+        <div style="background:#f8d7da;color:#721c24;padding:12px;margin-bottom:15px;border-radius:6px;">@TempData["Error"]</div>
+    }
+
+    <div class="details-wrap">
+        <div class="details-gallery">
+            <div class="details-main">
+                <img id="mainImg" src="@images[0]" alt="@Model.Name" title="Click to view larger" />
+            </div>
+
+            @if (images.Count > 1)
+            {
+                <div class="details-thumbs">
+                    @for (int i = 0; i < images.Count; i++)
+                    {
+                        <img src="@images[i]" class="thumb @(i == 0 ? "active" : "")"
+                             alt="@Model.Name angle @(i + 1)" />
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="details-info">
+            <span class="details-cat">@Model.Category</span>
+            <h1>@Model.Name</h1>
+            <div class="rating">★★★★★</div>
+
+            <p class="details-price">
+                ₹@Model.Price.ToString("N0")
+                @if (Model.OldPrice > Model.Price)
+                {
+                    <del>₹@Model.OldPrice.ToString("N0")</del>
+                    <span class="details-off">@Model.DiscountPercent% off</span>
+                }
+            </p>
+
+            <p class="details-desc">@(string.IsNullOrWhiteSpace(Model.Description) ? "Is product ka description jald hi add kiya jayega." : Model.Description)</p>
+
+            <p class="details-ship">🚚 ₹999 Free delivery on orders above · 7 din easy return · Cash on Delivery</p>
+
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <form asp-controller="Home" asp-action="AddToCart" method="post" class="details-form">
+                    <input type="hidden" name="productId" value="@Model.Id" />
+                    <input type="hidden" name="returnUrl" value="@returnUrl" />
+
+                    @if (Model.SizeList.Any())
+                    {
+                        <div class="size-box">
+                            <label class="size-title">Select Size:</label>
+                            <div class="size-options">
+                                @foreach (var s in Model.SizeList)
+                                {
+                                    <label class="size-pill">
+                                        <input type="radio" name="size" value="@s" required />
+                                        <span>@s</span>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    <div class="qty-row">
+                        <label>Quantity</label>
+                        <input type="number" name="quantity" value="1" min="1" max="100" />
+                        <button type="submit">Add to Cart</button>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <button type="button" class="details-login-btn"
+                        onclick="location.href='@Url.Action("Login", "Account")'">
+                    Log in and add to cart.
+                </button>
+            }
+        </div>
+    </div>
+
+    @if (related.Any())
+    {
+        <h2 class="details-related-title">See More</h2>
+        <div class="product-container">
+            @foreach (var r in related)
+            {
+                <div class="product-card">
+                    <a asp-controller="Home" asp-action="Details" asp-route-id="@r.Id" class="card-link">
+                        <img src="@r.ImageUrl" alt="@r.Name">
+                        <h3>@r.Name</h3>
+                    </a>
+                    <p class="price">₹@r.Price.ToString("N0") <del>₹@r.OldPrice.ToString("N0")</del></p>
+                </div>
+            }
+        </div>
+    }
+</section>
+
+<!-- Bade photo ke liye full screen -->
+<div id="lightbox" class="lightbox">
+    <img id="lightboxImg" src="" alt="" />
+</div>
+
+<script>
+    (function () {
+        var main = document.getElementById('mainImg');
+        var thumbs = document.querySelectorAll('.details-thumbs .thumb');
+        var box = document.getElementById('lightbox');
+        var boxImg = document.getElementById('lightboxImg');
+
+        thumbs.forEach(function (t) {
+            t.addEventListener('click', function () {
+                main.src = t.src;
+                thumbs.forEach(function (x) { x.classList.remove('active'); });
+                t.classList.add('active');
+            });
+        });
+
+        main.addEventListener('click', function () {
+            boxImg.src = main.src;
+            box.style.display = 'flex';
+        });
+        box.addEventListener('click', function () { box.style.display = 'none'; });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') box.style.display = 'none';
+        });
+    })();
+</script>

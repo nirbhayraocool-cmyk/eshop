@@ -17,7 +17,7 @@ namespace eshop.Models
 
         [Range(1, 100)]
         public int Quantity { get; set; } = 1;
-
+        public string? Size { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

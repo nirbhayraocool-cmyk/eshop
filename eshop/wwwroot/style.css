@@ -1309,12 +1309,12 @@ header {
         }
 
     .hero-btn {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
     }
 
     .shop-btn, .explore-btn {
-        width: 220px;
+        width: 280px;
     }
 
     /* ---------- CATEGORY SECTION ---------- */
@@ -1767,8 +1767,8 @@ header {
 
     .shop-btn, .explore-btn {
         width: 100%;
-        max-width: 240px;
-        padding: 13px 25px;
+        max-width: 80px;
+        padding: 7px 18px;
         font-size: 15px;
     }
 
@@ -2431,4 +2431,224 @@ header {
 
     .toast.error {
         background: #dc3545;
+    }
+/*detail css*/
+.card-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.admin-box textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: inherit;
+}
+
+.details-page {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+.details-back {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #555;
+    text-decoration: none;
+}
+
+.details-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    align-items: start;
+}
+
+.details-img img {
+    width: 100%;
+    max-height: 520px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.details-cat {
+    color: #ff4d4d;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.details-info h1 {
+    margin: 6px 0 10px;
+}
+
+.details-price {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+    .details-price del {
+        font-size: 18px;
+        color: #888;
+        font-weight: 400;
+        margin-left: 8px;
+    }
+
+.details-off {
+    font-size: 15px;
+    color: #28a745;
+    margin-left: 8px;
+}
+
+.details-desc {
+    white-space: pre-line;
+    color: #444;
+    line-height: 1.6;
+}
+
+.details-ship {
+    color: #555;
+    font-size: 14px;
+    margin: 15px 0;
+}
+
+.details-form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+    .details-form input[type=number] {
+        width: 80px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    .details-form button, .details-login-btn {
+        padding: 12px 26px;
+        background: #ff4d4d;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+.details-related-title {
+    margin: 45px 0 15px;
+}
+
+@media (max-width: 768px) {
+    .details-wrap {
+        grid-template-columns: 1fr;
+    }
+}
+.details-gallery {
+    width: 100%;
+}
+
+.details-main img {
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+    border-radius: 12px;
+    cursor: zoom-in;
+}
+
+.details-thumbs {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+    .details-thumbs .thumb {
+        width: 76px;
+        height: 76px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        opacity: 0.75;
+    }
+
+        .details-thumbs .thumb.active {
+            border-color: #ff4d4d;
+            opacity: 1;
+        }
+
+.size-box {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.size-title {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.size-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.size-pill input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.size-pill span {
+    display: inline-block;
+    min-width: 46px;
+    padding: 9px 14px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #fff;
+}
+
+.size-pill input:checked + span {
+    background: #ff4d4d;
+    color: #fff;
+    border-color: #ff4d4d;
+}
+
+.size-pill input:focus-visible + span {
+    outline: 2px solid #333;
+}
+
+.qty-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    cursor: zoom-out;
+}
+
+    .lightbox img {
+        max-width: 92vw;
+        max-height: 92vh;
+        border-radius: 8px;
     }
