@@ -1,3 +1,5 @@
+
+
 using System.Diagnostics;
 using eshop.Data;
 using eshop.Models;
@@ -17,7 +19,6 @@ namespace eshop.Controllers
             _logger = logger;
             _context = context;
         }
-
         public async Task<IActionResult> Index()
         {
             var vm = new HomeViewModel
@@ -197,7 +198,59 @@ namespace eshop.Controllers
             }
             return RedirectToAction("Cart");
         }
-        public IActionResult Contact() => View();
+        [HttpGet]
+        public IActionResult Contact()
+        {
+            var model = new ContactViewModel();
+
+            // login hai to apna email pehle se bhar do
+            if (User.Identity?.IsAuthenticated == true)
+                model.Email = User.Identity.Name ?? string.Empty;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Contact(ContactViewModel model)
+        {
+            // honeypot bhara hai to bot hai: chupchap success dikha do
+            if (!string.IsNullOrEmpty(model.Website))
+            {
+                TempData["ContactSuccess"] = "Aapka message bhej diya gaya. Hum jaldi reply karenge.";
+                return RedirectToAction(nameof(Contact));
+            }
+
+            if (!ModelState.IsValid) return View(model);
+
+            // ek email se 10 minute me 3 se zyada message nahi
+            var since = DateTime.Now.AddMinutes(-10);
+            var recent = await _context.ContactMessages
+                .CountAsync(m => m.Email == model.Email && m.CreatedAt > since);
+
+            if (recent >= 3)
+            {
+                ModelState.AddModelError("", "Bahut zyada messages bheje ja chuke hain. Kuch der baad try karo.");
+                return View(model);
+            }
+
+            var msg = new ContactMessage
+            {
+                Name = model.Name.Trim(),
+                Email = model.Email.Trim(),
+                Phone = string.IsNullOrWhiteSpace(model.Phone) ? null : model.Phone.Trim(),
+                Subject = model.Subject.Trim(),
+                Message = model.Message.Trim(),
+                CreatedAt = DateTime.Now
+            };
+
+            _context.ContactMessages.Add(msg);
+            await _context.SaveChangesAsync();
+
+            TempData["ContactSuccess"] = "Your message has been sent. We will reply soon.";
+            return RedirectToAction(nameof(Contact));
+        }
+        
         public IActionResult Privacy() => View();
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

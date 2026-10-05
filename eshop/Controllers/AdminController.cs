@@ -148,6 +148,43 @@ namespace eshop.Controllers
             }
             return RedirectToAction(nameof(Orders));
         }
+
+        public async Task<IActionResult> Messages()
+        {
+            var list = await _context.ContactMessages
+                .OrderByDescending(m => m.CreatedAt)
+                .ToListAsync();
+
+            return View(list);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ToggleMessageRead(int id)
+        {
+            var m = await _context.ContactMessages.FindAsync(id);
+            if (m != null)
+            {
+                m.IsRead = !m.IsRead;
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Messages));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteMessage(int id)
+        {
+            var m = await _context.ContactMessages.FindAsync(id);
+            if (m != null)
+            {
+                _context.ContactMessages.Remove(m);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Messages));
+        }
+
+
         private async Task<string?> BuildGalleryAsync(string? existing, List<IFormFile>? files)
         {
             var urls = new List<string>();

@@ -1,1 +1,91 @@
-﻿
+﻿@model eshop.Models.ContactViewModel
+@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<section class="contact-hero">
+    <h1>Contact <span>Us</span></h1>
+    <p>Any questions, order issues, or suggestions? We’re here.</p>
+</section>
+
+<section class="contact-section">
+
+    <div class="contact-info">
+        <div class="contact-card">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+                <h3>Phone</h3>
+                <p>+91 8874196809</p>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <i class="fa-solid fa-envelope"></i>
+            <div>
+                <h3>Email</h3>
+                <p>support@nextcart.com</p>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+                <h3>Address</h3>
+                <p>Lucknow, Uttar Pradesh</p>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <i class="fa-solid fa-headset"></i>
+            <div>
+                <h3>Support</h3>
+                <p>
+                    24/7
+                    To help you
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-form-card">
+        @if (TempData["ContactSuccess"] != null)
+        {
+            <div class="contact-success">✅ @TempData["ContactSuccess"]</div>
+        }
+
+        <h2>Send us a Message</h2>
+        <p class="contact-sub">Apni baat likho, hum jaldi se jaldi reply karenge.</p>
+        <form asp-controller="Home" asp-action="Contact" method="post">
+            <div asp-validation-summary="ModelOnly" class="auth-error"></div>
+
+            <div class="contact-row">
+                <div>
+                    <input asp-for="Name" placeholder="Your Name" />
+                    <span asp-validation-for="Name" class="auth-error"></span>
+                </div>
+                <div>
+                    <input asp-for="Email" placeholder="Your Email" />
+                    <span asp-validation-for="Email" class="auth-error"></span>
+                </div>
+            </div>
+
+            <input asp-for="Phone" placeholder="Phone (optional)" />
+            <span asp-validation-for="Phone" class="auth-error"></span>
+
+            <input asp-for="Subject" placeholder="Subject" />
+            <span asp-validation-for="Subject" class="auth-error"></span>
+
+            <textarea asp-for="Message" rows="5" placeholder="Your message..."></textarea>
+            <span asp-validation-for="Message" class="auth-error"></span>
+
+            <!-- spam jaal: isse mat bharna -->
+            <div class="contact-hp" aria-hidden="true">
+                <label>Website</label>
+                <input asp-for="Website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <button type="submit">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+    </div>
+
+</section>

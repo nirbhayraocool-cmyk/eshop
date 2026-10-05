@@ -1,0 +1,52 @@
+﻿@model List<eshop.Models.ContactMessage>
+@{
+    ViewData["Title"] = "Admin - Messages";
+}
+
+<div class="admin-wrap">
+    <div class="admin-head">
+        <h2>✉️ Contact Messages</h2>
+        <a asp-action="Index" class="admin-edit">← Products</a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <p>Abhi tak koi message nahi aaya.</p>
+    }
+
+    @foreach (var m in Model)
+    {
+        <div class="order-card @(m.IsRead ? "" : "msg-unread")">
+            <div class="order-head">
+                <div>
+                    <strong>@m.Subject</strong><br />
+                    <small>@m.CreatedAt.ToString("dd MMM yyyy, hh:mm tt")</small>
+                </div>
+                <span class="order-status">@(m.IsRead ? "Read" : "New")</span>
+            </div>
+
+            <p>
+                <b>@m.Name</b> ·
+                <a href="mailto:@m.Email">@m.Email</a>
+                @if (!string.IsNullOrEmpty(m.Phone))
+                {
+                    <text> · @m.Phone</text>
+                }
+            </p>
+
+            <p class="msg-text">@m.Message</p>
+
+            <div class="status-form">
+                <form asp-action="ToggleMessageRead" method="post">
+                    <input type="hidden" name="id" value="@m.Id" />
+                    <button type="submit" class="admin-save">@(m.IsRead ? "Unread karo" : "Read mark karo")</button>
+                </form>
+                <form asp-action="DeleteMessage" method="post"
+                      onsubmit="return confirm('Ye message delete karna hai?');">
+                    <input type="hidden" name="id" value="@m.Id" />
+                    <button type="submit" class="remove-btn">Delete</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>
