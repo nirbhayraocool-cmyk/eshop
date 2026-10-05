@@ -1,5 +1,6 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\imgshop\429cecea-f5fc-4782-82fc-51ec3c393ca1.jpg
 wwwroot\imgshop\backgroud_remover_feature_04.webp
 wwwroot\imgshop\bag-2.avif
 wwwroot\imgshop\bag-d.jpg
@@ -97,6 +98,5 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
-wwwroot\style.css
 wwwroot\style2.css
-wwwroot\imgshop\429cecea-f5fc-4782-82fc-51ec3c393ca1.jpg
+wwwroot\style.css
